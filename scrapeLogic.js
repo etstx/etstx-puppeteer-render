@@ -37,7 +37,7 @@ const scrapeLogic = async (res, serverName, serverPort) => {
 		const fullTitle = await textSelector?.evaluate((el) => el.textContent);
 
 		// Print the full title.
-		const logStatement = `scrapeLogic.js using Puppeteer is running on Port ${serverPort} on the ${serverName} Server. The title of the blog post is ${fullTitle}.`;
+		const logStatement = `Puppeteer scrapeLogic.js running on Port ${serverPort} on the ${serverName} Server. The title of the blog post is ${fullTitle}.`;
 		console.log(logStatement);
 		res.send(logStatement);
 	} catch (e) {
