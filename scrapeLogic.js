@@ -37,12 +37,12 @@ const scrapeLogic = async (res, serverName, serverPort) => {
 		const fullTitle = await textSelector?.evaluate((el) => el.textContent);
 
 		// Print the full title.
-		const logStatement = `Puppeteer scrapeLogic is running on the ${serverName} server. The title of the blog post is ${fullTitle}.`;
+		const logStatement = `scrapeLogic.js using Puppeteer is running on Port ${serverPort} on the ${serverName} Server. The title of the blog post is ${fullTitle}.`;
 		console.log(logStatement);
 		res.send(logStatement);
 	} catch (e) {
 		console.error(e);
-		res.send(`An error occurred while running Puppeteer on the ${serverName} server running on Port ${serverPort}. (${e})`);
+		res.send(`An error occurred while running Puppeteer running on Port ${serverPort} on the ${serverName} Server. (${e})`);
 	} finally {
 		await browser.close();
 	}
