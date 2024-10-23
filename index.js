@@ -6,7 +6,7 @@ const SERVER_NAME = process.env.SERVER_NAME || "ETS-TX";
 const SERVER_PORT = process.env.SERVER_PORT || 4000;
 
 app.get("/scrape", (req, res) => {
-  scrapeLogic(res);
+  scrapeLogic(res, SERVER_NAME, SERVER_PORT);
 });
 
 app.get("/", (req, res) => {

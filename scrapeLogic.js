@@ -2,7 +2,7 @@ const puppeteer = require("puppeteer");
 require("dotenv").config();
 const fs = require("fs");
 
-const scrapeLogic = async (res) => {
+const scrapeLogic = async (res, serverName, serverPort) => {
 	// Determine the executable path
 	const executablePath = process.env.NODE_ENV === "production" ? process.env.PUPPETEER_EXECUTABLE_PATH || puppeteer.executablePath() : puppeteer.executablePath();
 
@@ -37,12 +37,12 @@ const scrapeLogic = async (res) => {
 		const fullTitle = await textSelector?.evaluate((el) => el.textContent);
 
 		// Print the full title.
-		const logStatement = `Puppeteer scrapeLogic is running on the server. The title of the blog post is ${fullTitle}.`;
+		const logStatement = `Puppeteer scrapeLogic is running on the ${serverName} server. The title of the blog post is ${fullTitle}.`;
 		console.log(logStatement);
 		res.send(logStatement);
 	} catch (e) {
 		console.error(e);
-		res.send(`An error occurred while running Puppeteer on the server. ${e}`);
+		res.send(`An error occurred while running Puppeteer on the ${serverName} server running on Port ${serverPort}. ${e}`);
 	} finally {
 		await browser.close();
 	}
