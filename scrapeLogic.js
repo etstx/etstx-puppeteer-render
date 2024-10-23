@@ -2,10 +2,18 @@ const puppeteer = require("puppeteer");
 require("dotenv").config();
 
 const scrapeLogic = async (res) => {
+	// Determine the executable path
+	const executablePath = process.env.NODE_ENV === "production" ? process.env.PUPPETEER_EXECUTABLE_PATH : puppeteer.executablePath();
+
+	// Check if the executable file exists
+	if (!fs.existsSync(executablePath)) {
+		throw new Error(`Tried to find the browser at the configured path (${executablePath}), but no executable was found.`);
+	}
+
 	// Launch the browser and open a new blank page
 	const browser = await puppeteer.launch({
 		args: ["--disable-setuid-sandbox", "--no-sandbox", "--single-process", "--no-zygote"],
-		executablePath: process.env.NODE_ENV === "production" ? process.env.PUPPETEER_EXECUTABLE_PATH : puppeteer.executablePath(),
+		executablePath: executablePath,
 	});
 
 	try {
