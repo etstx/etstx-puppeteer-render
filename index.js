@@ -1,5 +1,5 @@
 const express = require("express");
-const {scrapeLogic} = require("./scrapeLogic");
+const { scrapeLogic } = require("./scrapeLogic");
 const app = express();
 
 const SERVER_NAME = process.env.SERVER_NAME || "ETS-TX";
