@@ -42,7 +42,7 @@ const scrapeLogic = async (res, serverName, serverPort) => {
 		res.send(logStatement);
 	} catch (e) {
 		console.error(e);
-		res.send(`An error occurred while running Puppeteer on the ${serverName} server running on Port ${serverPort}. ${e}`);
+		res.send(`An error occurred while running Puppeteer on the ${serverName} server running on Port ${serverPort}. (${e})`);
 	} finally {
 		await browser.close();
 	}
