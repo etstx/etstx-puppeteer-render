@@ -10,7 +10,7 @@ app.get("/scrape", (req, res) => {
 });
 
 app.get("/", (req, res) => {
-  res.send(`Puppeteer is running on the ${SERVER_NAME} Server on Port ${SERVER_PORT}.`);
+  res.send(`Puppeteer is running on Port ${SERVER_PORT} on the ${SERVER_NAME} Server.`);
 });
 
 app.listen(SERVER_PORT, () => {
