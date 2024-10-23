@@ -13,6 +13,6 @@ app.get("/", (req, res) => {
   res.send(`Puppeteer is running on the ${SERVER_NAME} Server on Port ${SERVER_PORT}.`);
 });
 
-app.listen(4000, () => {
+app.listen(SERVER_PORT, () => {
   console.log(`The ${SERVER_NAME} Server is running on Port ${SERVER_PORT}.`);
 });

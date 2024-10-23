@@ -1,12 +1,13 @@
 const puppeteer = require("puppeteer");
 require("dotenv").config();
+const fs = require("fs");
 
 const scrapeLogic = async (res) => {
 	// Determine the executable path
-	const executablePath = process.env.NODE_ENV === "production" ? process.env.PUPPETEER_EXECUTABLE_PATH : puppeteer.executablePath();
+	const executablePath = process.env.NODE_ENV === "production" ? process.env.PUPPETEER_EXECUTABLE_PATH || puppeteer.executablePath() : puppeteer.executablePath();
 
-	// Check if the executable file exists
-	if (!fs.existsSync(executablePath)) {
+	// Check if executable path exists only if it's explicitly set
+	if (process.env.PUPPETEER_EXECUTABLE_PATH && !fs.existsSync(executablePath)) {
 		throw new Error(`Tried to find the browser at the configured path (${executablePath}), but no executable was found.`);
 	}
 
@@ -18,7 +19,6 @@ const scrapeLogic = async (res) => {
 
 	try {
 		const page = await browser.newPage();
-		// throw new Error("This is a test error while running Puppeteer on the server.");
 
 		// Navigate the page to a URL.
 		await page.goto("https://developer.chrome.com/");
